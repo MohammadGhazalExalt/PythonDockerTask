@@ -1,0 +1,46 @@
+---
+ - name: Deploying application on machines
+   hosts: application 
+   gather_facts: yes
+   tasks:
+    
+    - name: Installing Repos
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Installing Packages
+      yum:
+        name: '{{ item }}'
+        state: present
+      with_items:
+        - yum-utils
+        - python2
+        - python-pip
+
+    - name: Installing Docker on machines
+      yum:
+        name: docker
+        state: latest
+
+    - name: Running Docker
+      shell: systemctl start docker
+
+    - name: installing docker SDK
+      command: "pip install docker"
+
+    - name: Creating application container on api Servers
+      docker_container:
+        name: system-stats-app
+        image: msrgexalt/system-stats-app:v1
+        exposed_ports:
+         - 5000
+        ports:
+         - "5000:5000"
+        env:
+         DB_SERVER: "192.168.205.94"
+         DB_PORT: "33060"
+         DB_NAME: "system_data"
+         DB_USER: "root"
+         DB_PASSWORD: "root"
+    

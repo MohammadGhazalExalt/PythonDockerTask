@@ -1,0 +1,2 @@
+[ 24/11/2020 03:51:59 ] : Received (GET) request on (http://192.168.204.229:5000/cpu)
+[ 24/11/2020 03:51:59 ] : Calling function read_cpu_stats with request : ImmutableMultiDict([])

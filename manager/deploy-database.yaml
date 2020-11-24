@@ -1,0 +1,53 @@
+---
+ - name: Deploying databases on machines
+   hosts: database 
+   gather_facts: no
+   tasks:
+
+    - name: Installing Packages
+      yum:
+        name: '{{ item }}'
+        state: present
+      with_items:
+        - epel-release
+        - yum-utils
+        - python2
+        - python-pip
+
+    - name: Installing Docker on machines
+      yum:
+        name: docker
+        state: latest
+
+    - name: Installing sysstat on machines
+      yum:
+        name: sysstat
+        state: latest
+
+    - name: Running Docker
+      shell: systemctl start docker
+
+    - name: installing docker SDK
+      command: "pip install docker"
+
+    - name: Creating Database container on Database Servers
+      docker_container:
+        name: system-db
+        image: msrgexalt/system-mysql:v1
+        ports:
+         - "33060:3306"
+        env:
+         MYSQL_ROOT_PASSWORD: "root"
+
+    - name: Copying script file
+      copy: 
+        src: ./cronscript.sh
+        dest: /root/cronscript.sh 
+        mode: u=rwx,g=rx,o=rx
+        
+    - name: Creating cronjob
+      cron:
+       name: "Update DB"
+       minute: "0"
+       job: "sh /root/cronscript.sh"
+ 
