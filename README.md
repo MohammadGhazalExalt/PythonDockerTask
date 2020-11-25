@@ -20,10 +20,10 @@ cd /var/etc/ansible
 4. In the hosts file, add two groups: **\[application\] and \[database\]** and add your machines IPs to them:
 ```bash
 [application]
-*IP ADDRESS*
+#*IP ADDRESS*
 
 [database]
-*IP ADDRESS*
+#*IP ADDRESS*
 ```
 
 5. Add files under the directory **manager** in the repository to the **ansible** directory in your machine
