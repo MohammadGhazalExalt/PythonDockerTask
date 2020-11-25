@@ -3,7 +3,7 @@
 This repository is for a flask application that reads details about linux system and stores them in a database
 
 1. On your Manager machine , first you will need to install **epel-release**:
-```
+```bash
 sudo yum install epel-release
 ```
 
