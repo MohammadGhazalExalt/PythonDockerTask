@@ -13,7 +13,7 @@ sudo yum install ansible
 ```
 
 3. Navigate to **ansible** directory in **/var/etc**:
-```
+```bash
 cd /var/etc/ansible
 ```
 
@@ -29,7 +29,7 @@ cd /var/etc/ansible
 5. Add files under the directory **manager** in the repository to the **ansible** directory in your machine
 
 6. Run the code inside deploy-machines.sh
-```
+```bash
 sh deploy-machines.sh
 ```
 
