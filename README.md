@@ -18,7 +18,7 @@ cd /var/etc/ansible
 ```
 
 4. In the hosts file, add two groups: **\[application\] and \[database\]** and add your machines IPs to them:
-```
+```bash
 [application]
 *IP ADDRESS*
 
